@@ -1,0 +1,74 @@
+﻿body {
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: #4682b4;
+    background-color: #9dc4e3;
+}
+
+table {
+    border-spacing: 0px;
+    border-width: 0px;
+    border-collapse: collapse;
+}
+
+td.content {
+    border-collapse: collapse;
+    padding: 5px 5px 5px 5px;
+    background-color: White;
+    border-width: 0px;
+    border-color: Black;
+}
+
+td.naglowek {
+    background-image: url("img/logo.jpg");
+    background-repeat: repeat-x;
+    padding: 0px 0px 0px 0px;
+}
+
+td.nazwa-strony {
+    background-color: white;  
+    padding: 10px 0px 0px 0px;
+
+}
+
+
+td.nazwa-strony span {
+    float:left;
+    padding: 0px 0px 0px 10px;
+    font-weight: bold;
+}
+
+.searchIcon {
+    align-content:stretch;
+}
+
+td.stopka {
+    background-image: url("img/dol.jpg");
+    background-repeat: repeat-x;
+    padding: 0px 0px 0px 0px;
+}
+
+td {
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+
+.wiersz:hover span{
+    font-weight: bold;
+}
+
+.formularzKomentarza #poleKomentarza input[type="text"] {
+    width: 150px;
+}
+
+.formularzKomentarza #poleIlosciDni input[type="text"] {
+    width: 60px;
+}
+
+.formularzKomentarza {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: none;
+}

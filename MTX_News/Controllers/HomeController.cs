@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MTX_News.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,18 +14,26 @@ namespace MTX_News.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [ChildActionOnly]
+        public ActionResult ProduktyZKomentarzami()
         {
-            ViewBag.Message = "Your application description page.";
+            Random rnd = new Random(10);
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            List<Produkt> produkts = new List<Produkt>();
+            for(int i=1;i<=2;i++)
+            {
+                produkts.Add(
+                    new Produkt
+                    {
+                        ProduktId = i,
+                        Kod = "Kod-komórka " + i.ToString(),
+                        Nazwa = "Nazwa-komórka " + i.ToString(),
+                        Komentarz = "Komentarz-komórka " + i.ToString(),
+                        PozostalaLiczbaDniDoKoncaWaznosci = rnd.Next(1, 30),
+                        KtoWprowadzil = "Operator " + i.ToString()
+                    });
+            }
+            return PartialView("_ProduktyZKomentarzami", produkts);
         }
     }
 }

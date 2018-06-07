@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MTX_News.Models.Produkt>
+
+
+<tbody>
+    @foreach (var produkt in Model)
+    {
+        <tr class="wiersz" @if (produkt.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+            <td>
+                <span>
+                    @produkt.ProduktId
+                </span>
+            </td>
+            <td>
+                <span>
+                    @produkt.Kod
+                </span>                
+            </td>
+            <td>
+                <span>
+                    @produkt.Nazwa
+                </span>
+            </td>
+            <td>
+                <span>
+                    @produkt.Komentarz
+                </span>
+            </td>
+
+            <td>
+                <span>
+                    @produkt.PozostalaLiczbaDniDoKoncaWaznosci dni
+                </span>                
+            </td>
+
+            <td>
+                <span>
+                    @produkt.KtoWprowadzil
+                </span>
+            </td>
+            <td class="menuEdycji">
+                <input type="image" src="~/Content/img/delete_15x15.png" />
+                <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
+                <input type="image" src="~/Content/img/save_15x15.png" />
+            </td>
+        </tr>
+        <tr id="formularzKomentarza-@produkt.ProduktId" class="formularzKomentarza"
+            @if (produkt.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="poleKomentarza">@Html.TextBox(produkt.Komentarz)</td>
+            <td id="poleIlosciDni">@Html.TextBox(produkt.PozostalaLiczbaDniDoKoncaWaznosci.ToString())</td>
+            <td id="ktoWprowadzil">@Html.TextBox(produkt.KtoWprowadzil)</td>
+            <td></td>
+        </tr>
+    }
+</tbody>
+
