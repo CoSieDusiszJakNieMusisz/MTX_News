@@ -31,9 +31,12 @@ td.nazwa-strony {
 
 }
 
+table input[type="text"]{
+    border-radius: 5px;
+}
 
 td.nazwa-strony span {
-    float:left;
+    float: left;
     padding: 0px 0px 0px 10px;
     font-weight: bold;
 }
@@ -59,6 +62,15 @@ td {
     font-weight: bold;
 }
 
+.formularzKomentarza {
+    display: none;
+}
+
+tr [type="text"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .formularzKomentarza #poleKomentarza input[type="text"] {
     width: 150px;
 }
@@ -67,8 +79,9 @@ td {
     width: 60px;
 }
 
-.formularzKomentarza {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: none;
+.formularzKomentarza #ktoWprowadzil input[type="text"] {
+    width: 100px;
 }
+
+
+

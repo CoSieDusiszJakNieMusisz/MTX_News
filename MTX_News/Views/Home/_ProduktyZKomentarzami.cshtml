@@ -1,56 +1,58 @@
-﻿@model IEnumerable<MTX_News.Models.Produkt>
-
+﻿@model MTX_News.ViewModels.ForumlarzKomentarzaViewModel
 
 <tbody>
-    @foreach (var produkt in Model)
+
+    @foreach (var towar in Model.ListaProduktow)
     {
-        <tr class="wiersz" @if (produkt.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+        <tr class="wiersz" @if (towar.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
             <td>
                 <span>
-                    @produkt.ProduktId
+                    @towar.Kod
                 </span>
             </td>
             <td>
                 <span>
-                    @produkt.Kod
+                    @towar.Kod
                 </span>                
             </td>
             <td>
                 <span>
-                    @produkt.Nazwa
+                    @towar.Nazwa
                 </span>
             </td>
             <td>
                 <span>
-                    @produkt.Komentarz
+                    @towar.Komentarz
                 </span>
             </td>
 
             <td>
                 <span>
-                    @produkt.PozostalaLiczbaDniDoKoncaWaznosci dni
+                    @towar.PozostalaLiczbaDniDoKoncaWaznosci dni
                 </span>                
             </td>
 
             <td>
                 <span>
-                    @produkt.KtoWprowadzil
+                    @towar.KtoWprowadzil
                 </span>
             </td>
             <td class="menuEdycji">
                 <input type="image" src="~/Content/img/delete_15x15.png" />
-                <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
-                <input type="image" src="~/Content/img/save_15x15.png" />
+                <input class="edytuj" data-id="@towar.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
+                @*<a class="zapisz" href="@Url.Action("ZapiszKomentarz","Home", new { komentarz = Model.Komentarz })">
+                    <img src="~/Content/img/save_15x15.png" />
+                </a>*@
             </td>
         </tr>
-        <tr id="formularzKomentarza-@produkt.ProduktId" class="formularzKomentarza"
-            @if (produkt.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+        <tr id="formularzKomentarza-@towar.ProduktId" class="formularzKomentarza"
+            @if (towar.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
             <td></td>
             <td></td>
             <td></td>
-            <td id="poleKomentarza">@Html.TextBox(produkt.Komentarz)</td>
-            <td id="poleIlosciDni">@Html.TextBox(produkt.PozostalaLiczbaDniDoKoncaWaznosci.ToString())</td>
-            <td id="ktoWprowadzil">@Html.TextBox(produkt.KtoWprowadzil)</td>
+            <td id="poleKomentarza">@Html.TextBoxFor(o => o.Komentarz)</td>
+            <td id="poleIlosciDni">@Html.TextBoxFor(o => o.PozostalaLiczbaDniDoKoncaWaznosci)</td>
+            <td id="ktoWprowadzil">@Html.TextBoxFor(o => o.KtoWprowadzil)</td>
             <td></td>
         </tr>
     }

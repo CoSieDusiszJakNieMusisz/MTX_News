@@ -11,17 +11,9 @@ namespace MTX_News.Models
         public int ProduktId { get; set; }
         public int TwrNumer { get; set; }
         public string Kod { get; set; }
-        public string Nazwa { get; set; }
-
-        [Required(ErrorMessage="Podaj ważność informacji.")]        
+        public string Nazwa { get; set; }     
         public int PozostalaLiczbaDniDoKoncaWaznosci { get; set; }
-
-        [Required(ErrorMessage = "Dodaj komentarz.")]
-        [StringLength(150)]
         public string Komentarz { get; set; }
-
-        [Required(ErrorMessage = "Wpisz kto wprowadza komentarz.")]
-        [StringLength(50)]
         public string KtoWprowadzil { get; set; }
     }
 }

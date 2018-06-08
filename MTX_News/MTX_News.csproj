@@ -154,6 +154,8 @@
     </Compile>
     <Compile Include="Models\Produkt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FiltrViewModel.cs" />
+    <Compile Include="ViewModels\ForumlarzKomentarzaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\ui-icons_444444_256x240.png" />

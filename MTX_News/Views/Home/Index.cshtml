@@ -1,4 +1,4 @@
-﻿@model MTX_News.Models.Produkt
+﻿@model MTX_News.ViewModels.FiltrViewModel
 
 <div class="tabelka" style='width: 1024px; margin: auto;'>
     <table>
@@ -9,25 +9,31 @@
         </tr>
         <tr>
             <td class="nazwa-strony">
-                <table>
-                    <tr>
-                        <td>
-                            @Html.LabelFor(o => o.Kod, "Kod: ")
-                            @Html.TextBoxFor(o => o.Kod)
-                        </td>
-                        <td>
+                @using (Html.BeginForm("Szukaj", "Home"))
+                {
+                    <table>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(o => o.Kod, "Kod: ")
+                                @Html.TextBoxFor(o => o.Kod)
+                            </td>
+                            <td>
+                                @Html.LabelFor(o => o.Nazwa, "Nazwa: ")
+                                @Html.TextBoxFor(o => o.Nazwa)
+                            </td>
+                            <td>
+                                <label class="checkBoxy">@Html.CheckBoxFor(o => o.ZawieraKomentarz) Pokaż produkty bez komentarza.</label>
+                            </td>
+                            <td>
+                                @*<a class="searchIcon" href="@Url.Action("Szukaj", "Home", new { vm = Model })">
+                                    <img src="~/Content/img/Search_20x20.png">
+                                </a>*@
 
-                            @Html.LabelFor(o => o.Nazwa, "Nazwa: ")
-                            @Html.TextBoxFor(o => o.Nazwa)
-                        </td>
-                        <td>
-                            <label class="checkBoxy"><input type="checkbox" /> Pokaż produkty bez komentarza.</label>
-                        </td>
-                        <td>
-                            <input class="searchIcon" type="image" src="~/Content/img/Search_20x20.png" />
-                        </td>
-                    </tr>
-                </table>
+                                <input class="searchIcon" type="image" src="~/Content/img/Search_20x20.png">
+                            </td>
+                        </tr>
+                    </table>
+                }
             </td>
         </tr>
         <tr>
