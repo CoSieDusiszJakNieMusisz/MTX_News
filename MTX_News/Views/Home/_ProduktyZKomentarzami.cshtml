@@ -1,9 +1,10 @@
-﻿@model MTX_News.ViewModels.ForumlarzKomentarzaViewModel
+﻿@model MTX_News.ViewModels.KomentarzViewModel
 
 <tbody>
 
     @foreach (var towar in Model.ListaProduktow)
     {
+
         <tr class="wiersz" @if (towar.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
             <td>
                 <span>
@@ -13,7 +14,7 @@
             <td>
                 <span>
                     @towar.Kod
-                </span>                
+                </span>
             </td>
             <td>
                 <span>
@@ -29,7 +30,7 @@
             <td>
                 <span>
                     @towar.PozostalaLiczbaDniDoKoncaWaznosci dni
-                </span>                
+                </span>
             </td>
 
             <td>
@@ -40,21 +41,18 @@
             <td class="menuEdycji">
                 <input type="image" src="~/Content/img/delete_15x15.png" />
                 <input class="edytuj" data-id="@towar.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
-                @*<a class="zapisz" href="@Url.Action("ZapiszKomentarz","Home", new { komentarz = Model.Komentarz })">
-                    <img src="~/Content/img/save_15x15.png" />
-                </a>*@
             </td>
         </tr>
+
         <tr id="formularzKomentarza-@towar.ProduktId" class="formularzKomentarza"
-            @if (towar.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+            @if (Model.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
             <td></td>
             <td></td>
-            <td></td>
-            <td id="poleKomentarza">@Html.TextBoxFor(o => o.Komentarz)</td>
-            <td id="poleIlosciDni">@Html.TextBoxFor(o => o.PozostalaLiczbaDniDoKoncaWaznosci)</td>
-            <td id="ktoWprowadzil">@Html.TextBoxFor(o => o.KtoWprowadzil)</td>
-            <td></td>
+            <td>
+                @Html.Action("FormularzKomentarza")
+            </td>
         </tr>
+        
     }
 </tbody>
 

@@ -71,15 +71,16 @@ tr [type="text"] {
     margin-bottom: 5px;
 }
 
-.formularzKomentarza #poleKomentarza input[type="text"] {
+.formularzKomentarza .poleKomentarza input[type="text"] {
     width: 150px;
 }
 
-.formularzKomentarza #poleIlosciDni input[type="text"] {
+.formularzKomentarza .poleIlosciDni input[type="number"] {
     width: 60px;
+    border-radius: 5px;
 }
 
-.formularzKomentarza #ktoWprowadzil input[type="text"] {
+.formularzKomentarza .ktoWprowadzil input[type="text"] {
     width: 100px;
 }
 

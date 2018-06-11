@@ -1,0 +1,18 @@
+﻿@model MTX_News.Models.Produkt
+
+@using (Html.BeginForm("FormularzKomentarza", "Home", FormMethod.Post))
+{
+    <td class="poleKomentarza">
+        @Html.EditorFor(o => Model.Komentarz)
+    </td>
+    <td class="poleIlosciDni">
+        @Html.EditorFor(o => Model.PozostalaLiczbaDniDoKoncaWaznosci)
+    </td>
+    <td class="ktoWprowadzil">
+        @Html.EditorFor(o => Model.KtoWprowadzil)
+    </td>
+    <td>
+        <input type="image" src="~/Content/img/save_15x15.png" />
+    </td>
+   
+}

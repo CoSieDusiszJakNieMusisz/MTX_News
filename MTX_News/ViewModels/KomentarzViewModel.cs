@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MTX_News.ViewModels
 {
-    public class ForumlarzKomentarzaViewModel
+    public class KomentarzViewModel
     {
         public int ProduktId { get; set; }
         public string Kod { get; set; }

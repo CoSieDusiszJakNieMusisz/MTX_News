@@ -1,4 +1,5 @@
-﻿using MTX_News.Models;
+﻿using MTX_News.Infrastructure;
+using MTX_News.Models;
 using MTX_News.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,15 @@ namespace MTX_News.Controllers
 {
     public class HomeController : Controller
     {
+        KomentarzManager komentarzManager;
         public ActionResult Index()
         {
             return View();
+        }
+
+        public HomeController()
+        {
+            komentarzManager = new KomentarzManager();
         }
 
         //[ChildActionOnly]
@@ -33,27 +40,22 @@ namespace MTX_News.Controllers
                         KtoWprowadzil = "Operator " + i.ToString()
                     });
             }
-            ForumlarzKomentarzaViewModel vm = new ForumlarzKomentarzaViewModel();
+            KomentarzViewModel vm = new KomentarzViewModel();
             vm.ListaProduktow = produkts;
             return PartialView("_ProduktyZKomentarzami", vm);
         }
 
+        public ActionResult FormularzKomentarza()
+        {
+            var produkt = new Produkt();
+            return PartialView("_FormularzKomentarza", produkt);
+        }
+
         [HttpPost]
-        public ActionResult ZapiszKomentarz(ForumlarzKomentarzaViewModel komentarz)
+        public ActionResult FormularzKomentarza(Produkt produkt)
         {
-            if(!ModelState.IsValid)
-            {
-                return View("Index", komentarz);
-            }
-            else
-            {
-                return View("Index");
-            }
-        }  
-        
-        public ActionResult FormularzKomentarza(int produktId)
-        {
-            return PartialView();
+            komentarzManager.DodajKomentarz(produkt);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -65,5 +67,6 @@ namespace MTX_News.Controllers
 
             return RedirectToAction("Index");
         }
+        
     }
 }
