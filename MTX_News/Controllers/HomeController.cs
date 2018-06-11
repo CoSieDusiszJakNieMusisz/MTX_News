@@ -30,7 +30,7 @@ namespace MTX_News.Controllers
         {
             Random rnd = new Random(10);
             List<Produkt> produkts = new List<Produkt>();
-            string sesja = session.GetSessionID();
+            string sesja = session.GetSessionID().ToString();
             for(int i=1;i<=100;i++)
             {
                 produkts.Add(
