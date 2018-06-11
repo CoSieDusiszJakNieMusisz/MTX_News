@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 
 namespace MTX_News.Controllers
 {
     public class HomeController : Controller
     {
         KomentarzManager komentarzManager;
+        SessionManager session = new SessionManager();
+
         public ActionResult Index()
         {
             return View();
@@ -27,6 +30,7 @@ namespace MTX_News.Controllers
         {
             Random rnd = new Random(10);
             List<Produkt> produkts = new List<Produkt>();
+            string sesja = session.GetSessionID();
             for(int i=1;i<=100;i++)
             {
                 produkts.Add(
@@ -37,7 +41,7 @@ namespace MTX_News.Controllers
                         Nazwa = "Nazwa-komórka " + i.ToString(),
                         Komentarz = "Komentarz-komórka " + i.ToString(),
                         PozostalaLiczbaDniDoKoncaWaznosci = rnd.Next(1, 30),
-                        KtoWprowadzil = "Operator " + i.ToString()
+                        KtoWprowadzil = sesja
                     });
             }
             KomentarzViewModel vm = new KomentarzViewModel();
