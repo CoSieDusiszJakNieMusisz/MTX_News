@@ -11,12 +11,7 @@
                     @towar.Kod
                 </span>
             </td>
-            <td>
-                <span>
-                    @towar.Kod
-                </span>
-            </td>
-            <td>
+            <td style="text-align:left;">
                 <span>
                     @towar.Nazwa
                 </span>
@@ -46,7 +41,6 @@
 
         <tr id="formularzKomentarza-@towar.ProduktId" class="formularzKomentarza"
             @if (Model.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
-            <td></td>
             <td></td>
             <td>
                 @Html.Action("FormularzKomentarza")

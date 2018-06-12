@@ -20,9 +20,9 @@ namespace MTX_News.Infrastructure
             throw new NotImplementedException();
         }
 
-        public int GetSessionID()
+        public string GetSessionID()
         {
-            return session.LCID;
+            return session.SessionID;
         }
 
         public void Set<T>(string name, T value)

@@ -7,7 +7,7 @@ namespace MTX_News.Infrastructure
 {
     public interface ISessionManager
     {
-        int GetSessionID();
+        string GetSessionID();
         void Set<T>(string name, T value);
         void Abandon();
         T TryGet<T>(string key);

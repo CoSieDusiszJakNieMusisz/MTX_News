@@ -22,6 +22,7 @@ namespace MTX_News.DAL
         public System.DateTime MtN_DataDo { get; set; }
         public short MtN_IloscDni { get; set; }
         public byte MtN_Stan { get; set; }
+        public string MtN_TwrNazwa { get; set; }
+        public string MtN_KtoWprowadzil { get; set; }
     }
-
 }

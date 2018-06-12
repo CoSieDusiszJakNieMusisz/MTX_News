@@ -18,7 +18,6 @@ namespace MTX_News.DAL
         public KomentarzContext()
             : base("name=KomentarzContext")
         {
-
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

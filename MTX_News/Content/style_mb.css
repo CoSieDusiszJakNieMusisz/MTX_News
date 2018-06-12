@@ -1,6 +1,6 @@
 ﻿body {
     font-family: Tahoma;
-    font-size: 12pt;
+    font-size: 10pt;
     color: #4682b4;
     background-color: #9dc4e3;
 }
@@ -23,6 +23,10 @@ td.naglowek {
     background-image: url("img/logo.jpg");
     background-repeat: repeat-x;
     padding: 0px 0px 0px 0px;
+}
+
+td.towarNazwa span {
+    text-align: left;
 }
 
 td.nazwa-strony {
@@ -60,6 +64,10 @@ td {
 
 .wiersz:hover span{
     font-weight: bold;
+}
+
+.wiersz.towarNazwa span {
+    text-align: left;
 }
 
 .formularzKomentarza {

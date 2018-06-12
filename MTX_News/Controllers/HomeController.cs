@@ -14,6 +14,7 @@ namespace MTX_News.Controllers
     {
         KomentarzManager komentarzManager;
         SessionManager session = new SessionManager();
+        KomentarzViewModel vm;
 
         public ActionResult Index()
         {
@@ -23,32 +24,23 @@ namespace MTX_News.Controllers
         public HomeController()
         {
             komentarzManager = new KomentarzManager();
+            vm = new KomentarzViewModel();
         }
 
-        //[ChildActionOnly]
         public ActionResult ProduktyZKomentarzami()
         {
-            Random rnd = new Random(10);
-            List<Produkt> produkts = new List<Produkt>();
-            string sesja = session.GetSessionID().ToString();
-            for(int i=1;i<=100;i++)
-            {
-                produkts.Add(
-                    new Produkt
-                    {
-                        ProduktId = i,
-                        Kod = "Kod-komórka " + i.ToString(),
-                        Nazwa = "Nazwa-komórka " + i.ToString(),
-                        Komentarz = "Komentarz-komórka " + i.ToString(),
-                        PozostalaLiczbaDniDoKoncaWaznosci = rnd.Next(1, 30),
-                        KtoWprowadzil = sesja
-                    });
-            }
-            KomentarzViewModel vm = new KomentarzViewModel();
-            vm.ListaProduktow = produkts;
+            vm.ListaProduktow = komentarzManager.PobierzKomentarzeZBazy();
             return PartialView("_ProduktyZKomentarzami", vm);
         }
 
+        [HttpPost]
+        public ActionResult ProduktyZKomentarzami(FiltrViewModel filtr)
+        {
+            vm.ListaProduktow = komentarzManager.PobierzKomentarzeZBazy(filtr);
+            return PartialView("_ProduktyZKomentarzami", vm);
+        }
+
+        [ChildActionOnly]
         public ActionResult FormularzKomentarza()
         {
             var produkt = new Produkt();

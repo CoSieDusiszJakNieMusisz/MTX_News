@@ -9,4 +9,10 @@ namespace MTX_News.Infrastructure
     {
         public const string KoszykSessionKey = "KoszykSessionKey";
     }
+
+    public enum StatusyKomentarzy
+    {
+        AktywnyKomentarz
+    }
+
 }

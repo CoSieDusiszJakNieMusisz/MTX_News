@@ -7,10 +7,10 @@
                 <img src="~/Content/img/logo.jpg" />
             </td>
         </tr>
-        <tr>
-            <td class="nazwa-strony">
-                @using (Html.BeginForm("Szukaj", "Home"))
-                {
+        @using (Html.BeginForm("ProduktyZKomentarzami", "Home", FormMethod.Post))
+        {
+            <tr>
+                <td class="nazwa-strony">
                     <table>
                         <tr>
                             <td>
@@ -29,15 +29,14 @@
                             </td>
                         </tr>
                     </table>
-                }
-            </td>
-        </tr>
+                </td>
+            </tr>
+        }
         <tr>
             <td class="content">
-                <table class="lista"  width="1200">
+                <table class="lista" width="1200">
                     <thead>
                         <tr>
-                            <th>Lp.</th>
                             <th>Kod</th>
                             <th>Nazwa</th>
                             <th>Komentarz</th>
