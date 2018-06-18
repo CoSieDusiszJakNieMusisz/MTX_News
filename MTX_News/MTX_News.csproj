@@ -156,7 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KomentarzController.cs" />
     <Compile Include="DAL\KomentarzModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,7 +172,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KomentarzModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DAL\KomentarzModelAdo.cs" />
     <Compile Include="DAL\MB_MtxNews.cs">
       <DependentUpon>KomentarzModel.tt</DependentUpon>
     </Compile>
@@ -250,9 +249,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\_ProduktyZKomentarzami.cshtml" />
-    <Content Include="Views\Home\_FormularzKomentarza.cshtml" />
+    <Content Include="Views\Komentarz\Index.cshtml" />
+    <Content Include="Views\Komentarz\_FormularzKomentarza.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

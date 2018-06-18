@@ -12,7 +12,8 @@ namespace MTX_News.Infrastructure
 
     public enum StatusyKomentarzy
     {
-        AktywnyKomentarz
+        AktywnyKomentarz,
+        NieaktywnyKomentarz
     }
 
 }

@@ -1,0 +1,21 @@
+﻿@model MTX_News.Models.Produkt
+
+@using (Html.BeginForm("FormularzKomentarza", "Komentarz", FormMethod.Post, new { id = Model.ProduktId }))
+{
+    <td class="poleKomentarza" id="@Model.ProduktId">
+        @Html.EditorFor(o => o.Komentarz, new { @class = Model.ProduktId })
+    </td>
+    <td class="poleIlosciDni" id="@Model.ProduktId">
+        @Html.EditorFor(o => Model.PozostalaLiczbaDniDoKoncaWaznosci)
+    </td>
+    <td class="ktoWprowadzil" id="@Model.ProduktId">
+        @Html.EditorFor(o => Model.KtoWprowadzil)
+    </td>
+
+    <td>
+        <a href="#">
+            <img type="image" src="~/Content/img/save_15x15.png" class="zapisz" data-id="@Model.ProduktId" />
+        </a>
+
+    </td>
+}

@@ -9,8 +9,23 @@
 </head>
 <body>
     <div>
-        @RenderBody()
+        <div class="tabelka" style="width: 1200px; margin: auto;">
+            <table>
+                <tr>
+                    <td class="naglowek">
+                        <img src="~/Content/img/logo.jpg" />
+                    </td>
+                </tr>
+                <tr>
+                    @RenderBody()
+                <tr>
+                    <td class="stopka">
+                        <img src="~/Content/img/dol.jpg" />
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    @RenderSection("Scripts", required: false)
+        @RenderSection("Scripts", required: false)
 </body>
 </html>
