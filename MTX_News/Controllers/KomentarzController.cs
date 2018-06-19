@@ -38,17 +38,22 @@ namespace MTX_News.Controllers
         [HttpPost]
         public ActionResult ZapiszKomentarz(KomentarzViewModel komentarz)
         {
-            Produkt produkt = new Produkt()
+            if(ModelState.IsValid)
             {
-                ProduktId = komentarz.ProduktId,
-                Komentarz = komentarz.Komentarz,
-                PozostalaLiczbaDniDoKoncaWaznosci = komentarz.PozostalaLiczbaDniDoKoncaWaznosci,
-                KtoWprowadzil = komentarz.KtoWprowadzil
-            };
-
-            komentarzMaganer.DodajKomentarz(produkt);
-
-            return Json(komentarz);
+                Produkt produkt = new Produkt()
+                {
+                    ProduktId = komentarz.ProduktId,
+                    Komentarz = komentarz.Komentarz,
+                    PozostalaLiczbaDniDoKoncaWaznosci = komentarz.PozostalaLiczbaDniDoKoncaWaznosci,
+                    KtoWprowadzil = komentarz.KtoWprowadzil
+                };
+                komentarzMaganer.DodajKomentarz(produkt);
+                return Json(komentarz);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }                      
         }
 
         [HttpPost]

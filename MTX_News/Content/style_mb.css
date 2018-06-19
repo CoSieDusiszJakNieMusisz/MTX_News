@@ -20,7 +20,7 @@ td.content {
 }
 
 td.naglowek {
-    background-image: url("img/logo.jpg");
+    background-image: url("img/logo.png");
     background-repeat: repeat-x;
     padding: 0px 0px 0px 0px;
 }
@@ -50,7 +50,7 @@ td.nazwa-strony span {
 }
 
 td.stopka {
-    background-image: url("img/dol.jpg");
+    background-image: url("img/dol.png");
     background-repeat: repeat-x;
     padding: 0px 0px 0px 0px;
 }
@@ -62,9 +62,9 @@ td {
     text-align: center;
 }
 
-.wiersz:hover span{
+/*.wiersz:hover span{
     font-weight: bold;
-}
+}*/
 
 .wiersz.towarNazwa span {
     text-align: left;
@@ -90,8 +90,50 @@ tr [type="text"] {
 
 .formularzKomentarza .ktoWprowadzil input[type="text"] {
     width: 100px;
-    visibility:
+    /*visibility:*/
 }
 
+.ui-tooltip {
+    width: 200px;
+    text-align: center;
+    box-shadow: none;
+    padding: 0;
+}
 
+.ui-tooltip-content {
+    position: relative;
+    padding: 0.5em;
+}
+
+    .ui-tooltip-content::after, .ui-tooltip-content::before {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        display: block;
+        left: 90px;
+    }
+
+.bottom .ui-tooltip-content::before {
+    bottom: -10px;
+    border-color: #AAA transparent;
+    border-width: 10px 10px 0;
+}
+
+.bottom .ui-tooltip-content::after {
+    bottom: -7px;
+    border-color: white transparent;
+    border-width: 10px 10px 0;
+}
+
+.top .ui-tooltip-content::before {
+    top: -10px;
+    border-color: #AAA transparent;
+    border-width: 0 10px 10px;
+}
+
+.top .ui-tooltip-content::after {
+    top: -7px;
+    border-color: white transparent;
+    border-width: 0 10px 10px;
+}
 

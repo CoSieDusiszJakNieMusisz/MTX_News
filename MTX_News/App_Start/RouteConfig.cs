@@ -13,6 +13,13 @@ namespace MTX_News
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+        //    routes.MapRoute(
+        //    name: "Zapisz",
+        //    url: "Komentarz/ZapiszKomentarz",
+        //    defaults: new { controller = "Komentarz", action = "ZapiszKomentarz"}
+        //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

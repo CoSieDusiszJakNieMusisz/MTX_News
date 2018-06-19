@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<MTX_News.Models.Produkt>
+@{ int licznik = 0; }
+
 <tr>
     @using (Html.BeginForm("Index", "Komentarz", FormMethod.Get))
     {
@@ -13,82 +15,83 @@
 
             <input type="image" src="~/Content/img/Search_20x20.png" />
         </td>
-
     }
 </tr>
-
-<td class="content">
-    <table class="lista" width="1200">
-        <thead>
-            <tr>
-                <th>Kod</th>
-                <th>Nazwa</th>
-                <th>Komentarz</th>
-                <th>Ważność informacji</th>
-                <th>Kto wprowadził</th>
-                <th>Edycja</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var produkt in Model)
-            {
-                <tr class="wiersz" id="@produkt.ProduktId" @if (produkt.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
-
-                    <td>
-                        <span>
-                            @produkt.Kod
-                        </span>
-                    </td>
-
-                    <td style="text-align:left;">
-                        <span>
-                            @produkt.Nazwa
-                        </span>
-                    </td>
-
-                    <td id="komentarz-@produkt.ProduktId">
-                        <span>
-                            @produkt.Komentarz
-                        </span>
-                    </td>
-
-                    <td id="ileDni-@produkt.ProduktId">
-                        <span>
-                            @produkt.PozostalaLiczbaDniDoKoncaWaznosci dni
-                        </span>
-                    </td>
-
-                    <td id="KtoWprowadzil-@produkt.ProduktId">
-                        <span>
-                            @produkt.KtoWprowadzil
-                        </span>
-                    </td>
-
-                    <td class="menuEdycji">
-                        <input class="usun" data-id="@produkt.ProduktId" type="image" src="~/Content/img/delete_15x15.png" />
-                        <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
-                    </td>
+<tr>
+    <td class="content">
+        <table class="lista" width="1024">
+            <thead>
+                <tr>
+                    <th>Kod</th>
+                    <th>Nazwa</th>
+                    <th width="250">Komentarz</th>
+                    <th>Ważność informacji</th>
+                    <th>Kto wprowadził</th>
+                    <th width="100">Edycja</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var produkt in Model)
+                {
+                    licznik = licznik + 1;
+                    <tr class="wiersz" id="@produkt.ProduktId" @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
 
-                <tr id="formularzKomentarza-@produkt.ProduktId" class="formularzKomentarza"
-                    @if (produkt.ProduktId % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
-                    <td></td>
-                    <td>
+                        <td>
+                            <span >
+                                @produkt.Kod
+                            </span>
+                        </td>
+
+                        <td style="text-align:left;">
+                            <span>
+                                @produkt.Nazwa
+                            </span>
+                        </td>
+
+                        <td id="komentarz-@produkt.ProduktId">
+                            <span>
+                                @produkt.Komentarz
+                            </span>
+                        </td>
+
+                        <td id="ileDni-@produkt.ProduktId">
+                            <span >
+                                @produkt.PozostalaLiczbaDniDoKoncaWaznosci dni
+                            </span>
+                        </td>
+
+                        <td id="KtoWprowadzil-@produkt.ProduktId">
+                            <span>
+                                @produkt.KtoWprowadzil
+                            </span>
+                        </td>
+
+                        <td class="menuEdycji">
+                            <input class="usun" data-id="@produkt.ProduktId" type="image" src="~/Content/img/delete_15x15.png" />
+                            <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
+                        </td>
+                    </tr>
+
+                    <tr id="formularzKomentarza-@produkt.ProduktId" class="formularzKomentarza"
+                        @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+                        <td></td>
+                        <td></td>
                         @Html.Action("FormularzKomentarza", "Komentarz", new { produktId = produkt.ProduktId })
-                    </td>
-                </tr>
 
-            }
-        </tbody>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </td>
+</tr>
 
-    </table>
-</td>
-
+<noscript id=i>This goes in the tooltip. Can be anything.</noscript>
+<div id=j>Hover for tooltip</div>
 
 @section Scripts
 {
     @System.Web.Optimization.Scripts.Render("~/bundles/jqueryAndJqueryUI")
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css">
     <script>
         $(function () {
             $(".edytuj").click(function () {
@@ -116,6 +119,7 @@
                     PozostalaLiczbaDniDoKoncaWaznosci: $("td#" + zapisywanyWiersz + ".poleIlosciDni input[type=number]").val(),
                     KtoWprowadzil: $("td#" + zapisywanyWiersz + ".ktoWprowadzil input[type=text]").val()
                 };
+
                 $.post("/Komentarz/ZapiszKomentarz", { "komentarz": KomentarzViewModel },
                     function (response) {
                         if (response != null) {
@@ -123,7 +127,7 @@
                             $("td#ileDni-" + zapisywanyWiersz + " span").text(response.PozostalaLiczbaDniDoKoncaWaznosci + " dni");
                             $("td#KtoWprowadzil-" + zapisywanyWiersz + " span").text(response.KtoWprowadzil);
                         };
-                    });                
+                    });
             });
 
             $(".usun").click(function () {
@@ -139,7 +143,50 @@
 
                         $.post("/Komentarz/UsunKomentarz", { "produktId": usuwanyWiersz });
                     });
-                };               
+                };
+            });
+        });
+
+        $(function () {
+            $("#j").tooltip({
+                items: "#j",
+                content: function () {
+                    return $("#i").text()
+                },
+                position: {
+                    my: "left top+15",
+                    at: "left bottom",
+                    collision: "flip",
+                    using: function (position, feedback) {
+                        $(this).addClass(feedback.vertical)
+                            .css(position);
+                    }
+                },
+
+            });
+
+        });
+
+        
+        $(function () {
+            var najechanyWiersz;
+            $("tr.wiersz").mouseenter(function () {
+                najechanyWiersz = $(this).attr("id");
+                $("td#ileDni-" + najechanyWiersz).tooltip({
+                    items: "td#ileDni-" + najechanyWiersz,
+                    content: function () {
+                        return $("td#ileDni-" + najechanyWiersz).text()
+                    },
+                    position: {
+                        my: "top",
+                        at: "bottom",
+                        collision: "flip",
+                        using: function (position, feedback) {
+                            $(this).addClass(feedback.vertical)
+                                .css(position);
+                        }
+                    }
+                });
             });
         });
     </script>
