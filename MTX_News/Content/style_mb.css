@@ -90,19 +90,17 @@ tr [type="text"] {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
-.formularzKomentarza .poleKomentarza input[type="text"] {
-    width: 150px;
+tr.wiersz {
+    height:30px;
 }
 
-.formularzKomentarza .poleIlosciDni input[type="number"] {
+tr.wiersz td input[type="text"]{
+    display: none;
+}
+
+tr.wiersz td input[type="number"] {
     width: 60px;
-    border-radius: 5px;
-}
-
-.formularzKomentarza .ktoWprowadzil input[type="text"] {
-    width: 100px;
-    /*visibility:*/
+    display: none;
 }
 
 .ui-tooltip {

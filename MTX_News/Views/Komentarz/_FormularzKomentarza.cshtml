@@ -2,17 +2,41 @@
 
 @using (Html.BeginForm("FormularzKomentarza", "Komentarz", FormMethod.Post, new { id = Model.ProduktId }))
 {
-    <td class="poleKomentarza" id="@Model.ProduktId">
-        @Html.EditorFor(o => o.Komentarz, new { @class = Model.ProduktId })
+    <td>
+        <span id="kod-@Model.ProduktId">@Model.Kod</span>
     </td>
-    <td class="poleIlosciDni" id="@Model.ProduktId">
-        @Html.EditorFor(o => Model.PozostalaLiczbaDniDoKoncaWaznosci, new { htmlAttributes = new { @min=0 , @max=90} })
-    </td>
-    <td class="ktoWprowadzil" id="@Model.ProduktId">
-        @Html.EditorFor(o => Model.KtoWprowadzil)
+
+    <td style="text-align:left;">
+        <span id="nazwa-@Model.ProduktId">@Model.Nazwa</span>
     </td>
 
     <td>
+        <span id="producent-@Model.ProduktId">@Model.Producent</span>
+    </td>
+
+    <td>
+        <span id="komentarz-@Model.ProduktId">@Model.Komentarz</span>
+        @Html.EditorFor(o => o.Komentarz, new { htmlAttributes = new { @id="textbox-komentarz-" + Model.ProduktId } })
+    </td>
+
+    <td>
+        <span id="ileDni-@Model.ProduktId">@Model.PozostalaLiczbaDniDoKoncaWaznosci dni</span>
+        @Html.EditorFor(o => Model.PozostalaLiczbaDniDoKoncaWaznosci, new { htmlAttributes = new { @min = 0, @max = 90, @id="number-ileDni-"+ Model.ProduktId } })
+    </td>
+
+    <td>
+        <span id="ktoWprowadzil-@Model.ProduktId">@Model.KtoWprowadzil</span>
+        @Html.EditorFor(o => Model.KtoWprowadzil, new { htmlAttributes = new { @id = "textbox-ktoWprowadzil-" + Model.ProduktId } })
+    </td>
+
+    <td class="menuEdycji">
+        <a href="#">
+            <img class="usun" type="image" src="~/Content/img/delete_15x15.png" data-id="@Model.ProduktId" />
+        </a>
+
+        <a href="#">
+            <img class="edytuj" type="image" src="~/Content/img/edit_15x15.png" data-id="@Model.ProduktId" />
+        </a>
         <a href="#">
             <img type="image" src="~/Content/img/save_15x15.png" class="zapisz" data-id="@Model.ProduktId" />
         </a>

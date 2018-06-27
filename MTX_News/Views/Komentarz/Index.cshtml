@@ -40,45 +40,8 @@
                 @foreach (var produkt in Model)
                 {
                     licznik = licznik + 1;
-                <tr class="wiersz" id="@produkt.ProduktId" @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
-
-                    <td id="kod-@produkt.ProduktId">
-                        <span>@produkt.Kod</span>
-                    </td>
-
-                    <td width="300" id="nazwa-@produkt.ProduktId" style="text-align:left;">
-                        <span>@produkt.Nazwa</span>
-                    </td>
-
-                    <td nowrap="nowrap" id="producent-@produkt.ProduktId">
-                        <span>@produkt.Producent</span>
-                    </td>
-
-                    <td id="komentarz-@produkt.ProduktId">
-                        <span>@produkt.Komentarz</span>
-                    </td>
-
-                    <td id="ileDni-@produkt.ProduktId">
-                        <span>@produkt.PozostalaLiczbaDniDoKoncaWaznosci dni</span>
-                    </td>
-
-                    <td id="ktoWprowadzil-@produkt.ProduktId">
-                        <span>@produkt.KtoWprowadzil</span>
-                    </td>
-
-                    <td class="menuEdycji">
-                        <input class="usun" data-id="@produkt.ProduktId" type="image" src="~/Content/img/delete_15x15.png" />
-                        <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
-                    </td>
-                </tr>
-
-                    <tr id="formularzKomentarza-@produkt.ProduktId" class="formularzKomentarza"
-                        @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        @Html.Action("FormularzKomentarza", "Komentarz", new { produktId = produkt.ProduktId })
-
+                    <tr class="wiersz" id="@produkt.ProduktId" @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+                        @Html.Action("FormularzKomentarza", "Komentarz", new { produkt = produkt})
                     </tr>
                 }
             </tbody>
@@ -92,23 +55,40 @@
     <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css">
     <script>
 
-        $(function () {
+        $(function () { 
             $(".edytuj").click(function () {
                 var wierszId = $(this).attr("data-id");
-                if ($("#formularzKomentarza-" + wierszId).is(":hidden")) {
+                if ($("input#textbox-komentarz-" + wierszId).is(":hidden")) {
+                    $(function () {
+                        $("span#komentarz-" + wierszId).fadeOut("fast");
+                        $("span#ileDni-" + wierszId).fadeOut("fast");
+                        $("span#ktoWprowadzil-" + wierszId).fadeOut("fast");
 
-                    $(".formularzKomentarza").fadeOut(1000, function () {
-                    });
+                        $(function () {
+                            $("input#textbox-komentarz-" + wierszId).fadeIn(1500);
+                            $("input#number-ileDni-" + wierszId).fadeIn(1500);
+                            $("input#textbox-ktoWprowadzil-" + wierszId).fadeIn(1500);
 
-                    $("#formularzKomentarza-" + wierszId).fadeIn(1000, function () {
-
-                    });
-                } else {
-                    $("#formularzKomentarza-" + wierszId).fadeOut(1000, function () {
-
+                        });
                     });
                 }
-            });
+
+                if ($("input#textbox-komentarz-" + wierszId).is(":visible")) {
+                    $(function () {
+
+                        $("input#textbox-komentarz-" + wierszId).fadeOut("fast");
+                        $("input#number-ileDni-" + wierszId).fadeOut("fast");
+                        $("input#textbox-ktoWprowadzil-" + wierszId).fadeOut("fast");
+
+                        $(function () {
+                            $("span#komentarz-" + wierszId).fadeIn(1500);
+                            $("span#ileDni-" + wierszId).fadeIn(1500);
+                            $("span#ktoWprowadzil-" + wierszId).fadeIn(1500);
+
+                        });
+                    });
+                };
+            });            
 
             $(".zapisz").click(function () {
                 var zapisywanyWiersz = $(this).attr("data-id");
@@ -137,13 +117,6 @@
                 var usuwanyWiersz = $(this).attr("data-id");
                 if (confirm("Czy na pewno chcesz usunąć ten wpis ?")) {
                     $("tr.wiersz#" + usuwanyWiersz).fadeOut(1000, function () {
-
-                        if ($("#formularzKomentarza-" + usuwanyWiersz).is(":visible")) {
-                            $("#formularzKomentarza-" + usuwanyWiersz).fadeOut(1000, function () {
-
-                            });
-                        };
-
                         $.post("/Komentarz/UsunKomentarz", { "produktId": usuwanyWiersz });
                     });
                 };

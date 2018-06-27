@@ -29,10 +29,8 @@ namespace MTX_News.Controllers
             return View(komentarze.ToList());
         }
 
-        public ActionResult FormularzKomentarza(int? produktId)
-        {
-            Produkt produkt = new Produkt();
-            produkt.ProduktId = produktId ?? 0;
+        public ActionResult FormularzKomentarza(Produkt produkt)
+        {            
             return PartialView("_FormularzKomentarza", produkt);
         }
         
