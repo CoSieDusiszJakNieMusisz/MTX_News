@@ -4,76 +4,77 @@
 <tr>
     @using (Html.BeginForm("Index", "Komentarz", FormMethod.Get))
     {
-        <td class="nazwa-strony">
-            @Html.Label("Kod: ")
-            @Html.TextBox("kod")
+    <td class="nazwa-strony">
+        @Html.Label("Kod: ")
+        @Html.TextBox("kod")
 
-            @Html.Label("Nazwa: ")
-            @Html.TextBox("nazwa")
+        @Html.Label("Nazwa: ")
+        @Html.TextBox("nazwa")
 
-            <label>@Html.CheckBox("zkomentarzem") Pokaż produkty bez komentarza.</label>
+        @Html.Label("Producent: ")
+        @Html.TextBox("producent")
 
-            <input type="image" src="~/Content/img/Search_20x20.png" />
-        </td>
+        <label>@Html.CheckBox("zkomentarzem") Pokaż produkty z komentarzem.</label>
+
+        <input type="image" src="~/Content/img/Search_20x20.png" />
+    </td>
     }
 </tr>
+
 <tr>
     <td class="content">
         <table class="lista" width="1024">
-            <thead>
+            <thead >
                 <tr>
                     <th>Kod</th>
                     <th>Nazwa</th>
+                    <th>Producent</th>
                     <th width="250">Komentarz</th>
                     <th>Ważność informacji</th>
                     <th>Kto wprowadził</th>
                     <th width="100">Edycja</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var produkt in Model)
                 {
                     licznik = licznik + 1;
-                    <tr class="wiersz" id="@produkt.ProduktId" @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+                <tr class="wiersz" id="@produkt.ProduktId" @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
 
-                        <td>
-                            <span >
-                                @produkt.Kod
-                            </span>
-                        </td>
+                    <td id="kod-@produkt.ProduktId">
+                        <span>@produkt.Kod</span>
+                    </td>
 
-                        <td style="text-align:left;">
-                            <span>
-                                @produkt.Nazwa
-                            </span>
-                        </td>
+                    <td width="300" id="nazwa-@produkt.ProduktId" style="text-align:left;">
+                        <span>@produkt.Nazwa</span>
+                    </td>
 
-                        <td id="komentarz-@produkt.ProduktId">
-                            <span>
-                                @produkt.Komentarz
-                            </span>
-                        </td>
+                    <td nowrap="nowrap" id="producent-@produkt.ProduktId">
+                        <span>@produkt.Producent</span>
+                    </td>
 
-                        <td id="ileDni-@produkt.ProduktId">
-                            <span >
-                                @produkt.PozostalaLiczbaDniDoKoncaWaznosci dni
-                            </span>
-                        </td>
+                    <td id="komentarz-@produkt.ProduktId">
+                        <span>@produkt.Komentarz</span>
+                    </td>
 
-                        <td id="KtoWprowadzil-@produkt.ProduktId">
-                            <span>
-                                @produkt.KtoWprowadzil
-                            </span>
-                        </td>
+                    <td id="ileDni-@produkt.ProduktId">
+                        <span>@produkt.PozostalaLiczbaDniDoKoncaWaznosci dni</span>
+                    </td>
 
-                        <td class="menuEdycji">
-                            <input class="usun" data-id="@produkt.ProduktId" type="image" src="~/Content/img/delete_15x15.png" />
-                            <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
-                        </td>
-                    </tr>
+                    <td id="ktoWprowadzil-@produkt.ProduktId">
+                        <span>@produkt.KtoWprowadzil</span>
+                    </td>
+
+                    <td class="menuEdycji">
+                        <input class="usun" data-id="@produkt.ProduktId" type="image" src="~/Content/img/delete_15x15.png" />
+                        <input class="edytuj" data-id="@produkt.ProduktId" type="image" src="~/Content/img/edit_15x15.png" />
+                    </td>
+                </tr>
 
                     <tr id="formularzKomentarza-@produkt.ProduktId" class="formularzKomentarza"
                         @if (licznik % 2 != 0) { <text> style="background-color:  rgb(253, 238, 244); font-weight:normal;" </text> }>
+                        <td></td>
                         <td></td>
                         <td></td>
                         @Html.Action("FormularzKomentarza", "Komentarz", new { produktId = produkt.ProduktId })
@@ -85,26 +86,25 @@
     </td>
 </tr>
 
-<noscript id=i>This goes in the tooltip. Can be anything.</noscript>
-<div id=j>Hover for tooltip</div>
-
 @section Scripts
 {
     @System.Web.Optimization.Scripts.Render("~/bundles/jqueryAndJqueryUI")
     <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css">
     <script>
+
         $(function () {
             $(".edytuj").click(function () {
                 var wierszId = $(this).attr("data-id");
                 if ($("#formularzKomentarza-" + wierszId).is(":hidden")) {
 
-                    $(".formularzKomentarza").slideUp("fast", function () {
-
+                    $(".formularzKomentarza").fadeOut(1000, function () {
                     });
 
-                    $("#formularzKomentarza-" + wierszId).slideDown(1000);
+                    $("#formularzKomentarza-" + wierszId).fadeIn(1000, function () {
+
+                    });
                 } else {
-                    $("#formularzKomentarza-" + wierszId).slideUp("fast", function () {
+                    $("#formularzKomentarza-" + wierszId).fadeOut(1000, function () {
 
                     });
                 }
@@ -114,7 +114,8 @@
                 var zapisywanyWiersz = $(this).attr("data-id");
 
                 var KomentarzViewModel = {
-                    ProduktId: zapisywanyWiersz,
+                    Kod: $("td#kod-" + zapisywanyWiersz + " span").text(),
+                    Nazwa: $("td#nazwa-" + zapisywanyWiersz + " span").text(),
                     Komentarz: $("td#" + zapisywanyWiersz + ".poleKomentarza input[type=text]").val(),
                     PozostalaLiczbaDniDoKoncaWaznosci: $("td#" + zapisywanyWiersz + ".poleIlosciDni input[type=number]").val(),
                     KtoWprowadzil: $("td#" + zapisywanyWiersz + ".ktoWprowadzil input[type=text]").val()
@@ -122,21 +123,23 @@
 
                 $.post("/Komentarz/ZapiszKomentarz", { "komentarz": KomentarzViewModel },
                     function (response) {
-                        if (response != null) {
+                        if (response == false) {
+                            alert("Uzupełnij wszystkie pola !");
+                        } else {
                             $("td#komentarz-" + zapisywanyWiersz + " span").text(response.Komentarz);
                             $("td#ileDni-" + zapisywanyWiersz + " span").text(response.PozostalaLiczbaDniDoKoncaWaznosci + " dni");
-                            $("td#KtoWprowadzil-" + zapisywanyWiersz + " span").text(response.KtoWprowadzil);
-                        };
+                            $("td#ktoWprowadzil-" + zapisywanyWiersz + " span").text(response.KtoWprowadzil);
+                        };                     
                     });
             });
 
             $(".usun").click(function () {
                 var usuwanyWiersz = $(this).attr("data-id");
                 if (confirm("Czy na pewno chcesz usunąć ten wpis ?")) {
-                    $("tr.wiersz#" + usuwanyWiersz).slideUp("slow", function () {
+                    $("tr.wiersz#" + usuwanyWiersz).fadeOut(1000, function () {
 
                         if ($("#formularzKomentarza-" + usuwanyWiersz).is(":visible")) {
-                            $("#formularzKomentarza-" + usuwanyWiersz).slideUp("fast", function () {
+                            $("#formularzKomentarza-" + usuwanyWiersz).fadeOut(1000, function () {
 
                             });
                         };
@@ -146,36 +149,15 @@
                 };
             });
         });
-
-        $(function () {
-            $("#j").tooltip({
-                items: "#j",
-                content: function () {
-                    return $("#i").text()
-                },
-                position: {
-                    my: "left top+15",
-                    at: "left bottom",
-                    collision: "flip",
-                    using: function (position, feedback) {
-                        $(this).addClass(feedback.vertical)
-                            .css(position);
-                    }
-                },
-
-            });
-
-        });
-
         
         $(function () {
             var najechanyWiersz;
             $("tr.wiersz").mouseenter(function () {
                 najechanyWiersz = $(this).attr("id");
-                $("td#ileDni-" + najechanyWiersz).tooltip({
-                    items: "td#ileDni-" + najechanyWiersz,
+                $("p#ileDni-" + najechanyWiersz).tooltip({
+                    items: "p#ileDni-" + najechanyWiersz,
                     content: function () {
-                        return $("td#ileDni-" + najechanyWiersz).text()
+                        return $("p#ileDni-" + najechanyWiersz).text()
                     },
                     position: {
                         my: "top",
@@ -187,8 +169,14 @@
                         }
                     }
                 });
-            });
+
+                $("p#ileDni-" + najechanyWiersz).mouseleave(function () {
+                    $("p#ileDni-" + najechanyWiersz).tooltip("close");
+                });
+            });            
         });
+
+
     </script>
 }
 

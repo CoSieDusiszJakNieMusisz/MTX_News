@@ -12,6 +12,8 @@ namespace MTX_News.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class KomentarzContext : DbContext
     {
@@ -26,5 +28,30 @@ namespace MTX_News.DAL
         }
     
         public virtual DbSet<MB_MtxNews> MB_MtxNews { get; set; }
+    
+        public virtual int MB_MTX_DodajKomentarz(string kod, string nazwa, string komentarz, string ktoWprowadzil, Nullable<int> waznoscKomentarzaWDniach)
+        {
+            var kodParameter = kod != null ?
+                new ObjectParameter("Kod", kod) :
+                new ObjectParameter("Kod", typeof(string));
+    
+            var nazwaParameter = nazwa != null ?
+                new ObjectParameter("Nazwa", nazwa) :
+                new ObjectParameter("Nazwa", typeof(string));
+    
+            var komentarzParameter = komentarz != null ?
+                new ObjectParameter("Komentarz", komentarz) :
+                new ObjectParameter("Komentarz", typeof(string));
+    
+            var ktoWprowadzilParameter = ktoWprowadzil != null ?
+                new ObjectParameter("KtoWprowadzil", ktoWprowadzil) :
+                new ObjectParameter("KtoWprowadzil", typeof(string));
+    
+            var waznoscKomentarzaWDniachParameter = waznoscKomentarzaWDniach.HasValue ?
+                new ObjectParameter("WaznoscKomentarzaWDniach", waznoscKomentarzaWDniach) :
+                new ObjectParameter("WaznoscKomentarzaWDniach", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MB_MTX_DodajKomentarz", kodParameter, nazwaParameter, komentarzParameter, ktoWprowadzilParameter, waznoscKomentarzaWDniachParameter);
+        }
     }
 }

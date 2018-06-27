@@ -10,5 +10,6 @@ namespace MTX_News.ViewModels
         public string Kod { get; set; }
         public string Nazwa { get; set; }
         public bool ZawieraKomentarz { get; set; }
+        public string Producent { get; set; }
     }
 }

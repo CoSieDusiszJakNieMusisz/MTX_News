@@ -19,7 +19,15 @@
           <Property Name="MtN_IloscDni" Type="smallint" Nullable="false" />
           <Property Name="MtN_Stan" Type="tinyint" Nullable="false" />
           <Property Name="MtN_KtoWprowadzil" Type="varchar" MaxLength="100" />
+          <Property Name="MtN_Producent" Type="varchar" MaxLength="20" />
         </EntityType>
+        <Function Name="MB_MTX_DodajKomentarz" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDN">
+          <Parameter Name="Kod" Type="varchar" Mode="In" />
+          <Parameter Name="Nazwa" Type="varchar" Mode="In" />
+          <Parameter Name="Komentarz" Type="varchar" Mode="In" />
+          <Parameter Name="KtoWprowadzil" Type="varchar" Mode="In" />
+          <Parameter Name="WaznoscKomentarzaWDniach" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="KomentarzModelStoreContainer">
           <EntitySet Name="MB_MtxNews" EntityType="Self.MB_MtxNews" Schema="CDN" store:Type="Tables" />
         </EntityContainer>
@@ -41,9 +49,17 @@
           <Property Name="MtN_Stan" Type="Byte" Nullable="false" />
           <Property Name="MtN_TwrNazwa" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="MtN_KtoWprowadzil" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MtN_Producent" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="KomentarzContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MB_MtxNews" EntityType="Self.MB_MtxNews" />
+          <FunctionImport Name="MB_MTX_DodajKomentarz">
+            <Parameter Name="Kod" Mode="In" Type="String" />
+            <Parameter Name="Nazwa" Mode="In" Type="String" />
+            <Parameter Name="Komentarz" Mode="In" Type="String" />
+            <Parameter Name="KtoWprowadzil" Mode="In" Type="String" />
+            <Parameter Name="WaznoscKomentarzaWDniach" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -54,6 +70,7 @@
           <EntitySetMapping Name="MB_MtxNews">
             <EntityTypeMapping TypeName="KomentarzModel.MB_MtxNews">
               <MappingFragment StoreEntitySet="MB_MtxNews">
+                <ScalarProperty Name="MtN_Producent" ColumnName="MtN_Producent" />
                 <ScalarProperty Name="MtN_KtoWprowadzil" ColumnName="MtN_KtoWprowadzil" />
                 <ScalarProperty Name="MtN_TwrNazwa" ColumnName="MtN_TwrNazwa" />
                 <ScalarProperty Name="MtN_ID" ColumnName="MtN_ID" />
@@ -67,6 +84,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="MB_MTX_DodajKomentarz" FunctionName="KomentarzModel.Store.MB_MTX_DodajKomentarz" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

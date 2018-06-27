@@ -15,13 +15,14 @@ namespace MTX_News.Controllers
         FiltrViewModel filtr;
 
         // GET: Komentarz
-        public ActionResult Index(string kod, string nazwa, bool? zkomentarzem)
+        public ActionResult Index(string kod, string nazwa, bool? zkomentarzem, string producent)
         {
             filtr = new FiltrViewModel()
             {
                 Kod=kod,
                 Nazwa = nazwa,
-                ZawieraKomentarz = zkomentarzem ?? false
+                ZawieraKomentarz = zkomentarzem ?? false,
+                Producent = producent
             };
             
             var komentarze = komentarzMaganer.PobierzKomentarzeZBazy(filtr);
@@ -38,11 +39,12 @@ namespace MTX_News.Controllers
         [HttpPost]
         public ActionResult ZapiszKomentarz(KomentarzViewModel komentarz)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Produkt produkt = new Produkt()
                 {
-                    ProduktId = komentarz.ProduktId,
+                    Kod = komentarz.Kod,
+                    Nazwa = komentarz.Nazwa,
                     Komentarz = komentarz.Komentarz,
                     PozostalaLiczbaDniDoKoncaWaznosci = komentarz.PozostalaLiczbaDniDoKoncaWaznosci,
                     KtoWprowadzil = komentarz.KtoWprowadzil
@@ -52,8 +54,8 @@ namespace MTX_News.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
-            }                      
+                return Json(false);
+            }
         }
 
         [HttpPost]

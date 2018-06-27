@@ -2,13 +2,26 @@
     font-family: Tahoma;
     font-size: 10pt;
     color: #4682b4;
-    background-color: #9dc4e3;
+    background-image: url('img/tlo.png');
+    background-attachment: fixed;
 }
+
+.tabelaGlowna {
+    padding: 5px;
+    /*box-shadow: 28px 25px 51px -10px rgba(70,130,180,1);*/
+    box-shadow: 0px 5px 104px 12px rgba(70,130,180,1);
+}
+
 
 table {
     border-spacing: 0px;
     border-width: 0px;
     border-collapse: collapse;
+}
+
+thead tr{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 td.content {
@@ -32,7 +45,6 @@ td.towarNazwa span {
 td.nazwa-strony {
     background-color: white;  
     padding: 10px 0px 0px 0px;
-
 }
 
 table input[type="text"]{

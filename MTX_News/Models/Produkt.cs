@@ -23,5 +23,7 @@ namespace MTX_News.Models
         [Required(ErrorMessage = "Wpisz kto wprowadza komentarz.")]
         [StringLength(50)]
         public string KtoWprowadzil { get; set; }
+
+        public string Producent { get; set; }
     }
 }

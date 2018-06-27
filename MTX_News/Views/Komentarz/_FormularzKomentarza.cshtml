@@ -6,7 +6,7 @@
         @Html.EditorFor(o => o.Komentarz, new { @class = Model.ProduktId })
     </td>
     <td class="poleIlosciDni" id="@Model.ProduktId">
-        @Html.EditorFor(o => Model.PozostalaLiczbaDniDoKoncaWaznosci)
+        @Html.EditorFor(o => Model.PozostalaLiczbaDniDoKoncaWaznosci, new { htmlAttributes = new { @min=0 , @max=90} })
     </td>
     <td class="ktoWprowadzil" id="@Model.ProduktId">
         @Html.EditorFor(o => Model.KtoWprowadzil)

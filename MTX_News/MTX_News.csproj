@@ -178,6 +178,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\BaseQuery.cs" />
     <Compile Include="Infrastructure\Const.cs" />
     <Compile Include="Infrastructure\ISessionManager.cs" />
     <Compile Include="Infrastructure\KomentarzManager.cs" />
@@ -194,6 +195,7 @@
     <Content Include="Content\images\ui-icons_777777_256x240.png" />
     <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\img\tlo.png" />
     <Content Include="Content\img\delete_15x15.png" />
     <Content Include="Content\img\dol.png" />
     <Content Include="Content\img\edit_15x15.png" />

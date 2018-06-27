@@ -24,5 +24,6 @@ namespace MTX_News.DAL
         public byte MtN_Stan { get; set; }
         public string MtN_TwrNazwa { get; set; }
         public string MtN_KtoWprowadzil { get; set; }
+        public string MtN_Producent { get; set; }
     }
 }
