@@ -4,11 +4,11 @@
     color: #4682b4;
     background-image: url('img/tlo.png');
     background-attachment: fixed;
+    background-repeat: repeat-x;
 }
 
 .tabelaGlowna {
     padding: 5px;
-    /*box-shadow: 28px 25px 51px -10px rgba(70,130,180,1);*/
     box-shadow: 0px 5px 104px 12px rgba(70,130,180,1);
 }
 
@@ -74,10 +74,6 @@ td {
     text-align: center;
 }
 
-/*.wiersz:hover span{
-    font-weight: bold;
-}*/
-
 .wiersz.towarNazwa span {
     text-align: left;
 }
@@ -95,55 +91,16 @@ tr.wiersz {
 }
 
 tr.wiersz td input[type="text"]{
+    width:100px;
     display: none;
 }
 
-tr.wiersz td input[type="number"] {
-    width: 60px;
-    display: none;
-}
-
-.ui-tooltip {
-    width: 200px;
-    text-align: center;
-    box-shadow: none;
-    padding: 0;
-}
-
-.ui-tooltip-content {
-    position: relative;
-    padding: 0.5em;
-}
-
-    .ui-tooltip-content::after, .ui-tooltip-content::before {
-        content: "";
-        position: absolute;
-        border-style: solid;
-        display: block;
-        left: 90px;
+    tr.wiersz td input[type="text"].komentarz-input{
+        width: 200px;
+        /*display: none;*/
     }
 
-.bottom .ui-tooltip-content::before {
-    bottom: -10px;
-    border-color: #AAA transparent;
-    border-width: 10px 10px 0;
+tr.wiersz td input[type="number"] {
+    width: 40px;
+    display: none;
 }
-
-.bottom .ui-tooltip-content::after {
-    bottom: -7px;
-    border-color: white transparent;
-    border-width: 10px 10px 0;
-}
-
-.top .ui-tooltip-content::before {
-    top: -10px;
-    border-color: #AAA transparent;
-    border-width: 0 10px 10px;
-}
-
-.top .ui-tooltip-content::after {
-    top: -7px;
-    border-color: white transparent;
-    border-width: 0 10px 10px;
-}
-

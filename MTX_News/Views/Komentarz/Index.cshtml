@@ -13,9 +13,8 @@
 
         @Html.Label("Producent: ")
         @Html.TextBox("producent")
-
+        
         <label>@Html.CheckBox("zkomentarzem") Pokaż produkty z komentarzem.</label>
-
         <input type="image" src="~/Content/img/Search_20x20.png" />
     </td>
     }
@@ -23,7 +22,7 @@
 
 <tr>
     <td class="content">
-        <table class="lista" width="1024">
+        <table class="lista" width="1200">
             <thead >
                 <tr>
                     <th>Kod</th>
@@ -31,7 +30,7 @@
                     <th>Producent</th>
                     <th width="250">Komentarz</th>
                     <th>Ważność informacji</th>
-                    <th>Kto wprowadził</th>
+                    <th >Kto wprowadził</th>
                     <th width="100">Edycja</th>
                 </tr>
             </thead>
@@ -52,105 +51,8 @@
 @section Scripts
 {
     @System.Web.Optimization.Scripts.Render("~/bundles/jqueryAndJqueryUI")
-    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css">
-    <script>
-
-        $(function () { 
-            $(".edytuj").click(function () {
-                var wierszId = $(this).attr("data-id");
-                if ($("input#textbox-komentarz-" + wierszId).is(":hidden")) {
-                    $(function () {
-                        $("span#komentarz-" + wierszId).fadeOut("fast");
-                        $("span#ileDni-" + wierszId).fadeOut("fast");
-                        $("span#ktoWprowadzil-" + wierszId).fadeOut("fast");
-
-                        $(function () {
-                            $("input#textbox-komentarz-" + wierszId).fadeIn(1500);
-                            $("input#number-ileDni-" + wierszId).fadeIn(1500);
-                            $("input#textbox-ktoWprowadzil-" + wierszId).fadeIn(1500);
-
-                        });
-                    });
-                }
-
-                if ($("input#textbox-komentarz-" + wierszId).is(":visible")) {
-                    $(function () {
-
-                        $("input#textbox-komentarz-" + wierszId).fadeOut("fast");
-                        $("input#number-ileDni-" + wierszId).fadeOut("fast");
-                        $("input#textbox-ktoWprowadzil-" + wierszId).fadeOut("fast");
-
-                        $(function () {
-                            $("span#komentarz-" + wierszId).fadeIn(1500);
-                            $("span#ileDni-" + wierszId).fadeIn(1500);
-                            $("span#ktoWprowadzil-" + wierszId).fadeIn(1500);
-
-                        });
-                    });
-                };
-            });            
-
-            $(".zapisz").click(function () {
-                var zapisywanyWiersz = $(this).attr("data-id");
-
-                var KomentarzViewModel = {
-                    Kod: $("td#kod-" + zapisywanyWiersz + " span").text(),
-                    Nazwa: $("td#nazwa-" + zapisywanyWiersz + " span").text(),
-                    Komentarz: $("td#" + zapisywanyWiersz + ".poleKomentarza input[type=text]").val(),
-                    PozostalaLiczbaDniDoKoncaWaznosci: $("td#" + zapisywanyWiersz + ".poleIlosciDni input[type=number]").val(),
-                    KtoWprowadzil: $("td#" + zapisywanyWiersz + ".ktoWprowadzil input[type=text]").val()
-                };
-
-                $.post("/Komentarz/ZapiszKomentarz", { "komentarz": KomentarzViewModel },
-                    function (response) {
-                        if (response == false) {
-                            alert("Uzupełnij wszystkie pola !");
-                        } else {
-                            $("td#komentarz-" + zapisywanyWiersz + " span").text(response.Komentarz);
-                            $("td#ileDni-" + zapisywanyWiersz + " span").text(response.PozostalaLiczbaDniDoKoncaWaznosci + " dni");
-                            $("td#ktoWprowadzil-" + zapisywanyWiersz + " span").text(response.KtoWprowadzil);
-                        };                     
-                    });
-            });
-
-            $(".usun").click(function () {
-                var usuwanyWiersz = $(this).attr("data-id");
-                if (confirm("Czy na pewno chcesz usunąć ten wpis ?")) {
-                    $("tr.wiersz#" + usuwanyWiersz).fadeOut(1000, function () {
-                        $.post("/Komentarz/UsunKomentarz", { "produktId": usuwanyWiersz });
-                    });
-                };
-            });
-        });
-        
-        $(function () {
-            var najechanyWiersz;
-            $("tr.wiersz").mouseenter(function () {
-                najechanyWiersz = $(this).attr("id");
-                $("p#ileDni-" + najechanyWiersz).tooltip({
-                    items: "p#ileDni-" + najechanyWiersz,
-                    content: function () {
-                        return $("p#ileDni-" + najechanyWiersz).text()
-                    },
-                    position: {
-                        my: "top",
-                        at: "bottom",
-                        collision: "flip",
-                        using: function (position, feedback) {
-                            $(this).addClass(feedback.vertical)
-                                .css(position);
-                        }
-                    }
-                });
-
-                $("p#ileDni-" + najechanyWiersz).mouseleave(function () {
-                    $("p#ileDni-" + najechanyWiersz).tooltip("close");
-                });
-            });            
-        });
-
-
-    </script>
+    @*<link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css">*@
+    <script src="~/Scripts/skryptyFormularzaKomentarza.js"></script>               
 }
 
 

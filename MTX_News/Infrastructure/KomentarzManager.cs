@@ -94,6 +94,5 @@ namespace MTX_News.Infrastructure
             return produkty;
         }
     }
-
 }
 
